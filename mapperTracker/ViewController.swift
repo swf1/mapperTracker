@@ -39,6 +39,7 @@ class ViewController: UIViewController {
         mapboxView.delegate = self
         mapboxView.isPitchEnabled = true
         mapboxView.showsHeading = false
+        mapboxView.compassView.isHidden = true
         
         // Request location access
         if CLLocationManager.authorizationStatus() != .authorizedAlways {
@@ -78,15 +79,24 @@ class ViewController: UIViewController {
     
     func courseMode() {
         mapboxView.userTrackingMode = .followWithCourse
-        mapboxView.camera.pitch = 60
-        mapboxView.setZoomLevel(17.0, animated: true)
-        
+        mapboxView.setCamera(
+            MGLMapCamera(
+                lookingAtCenter: mapboxView.userLocation!.coordinate,
+                fromDistance: 1000,
+                pitch: 70.0,
+                heading: mapboxView.camera.heading),
+            animated: true)
     }
     
     func topMode() {
         mapboxView.userTrackingMode = .follow
-        mapboxView.camera.pitch = 0
-        mapboxView.setZoomLevel(17.0, animated: true)
+        mapboxView.setCamera(
+            MGLMapCamera(
+                lookingAtCenter: mapboxView.userLocation!.coordinate,
+                fromDistance: 1500,
+                pitch: 0.0,
+                heading: mapboxView.camera.heading),
+            animated: true)
     }
     
     // Center the map
