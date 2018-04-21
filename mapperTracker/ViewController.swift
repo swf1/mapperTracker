@@ -41,6 +41,8 @@ class ViewController: UIViewController {
         mapboxView.showsHeading = false
         mapboxView.compassView.isHidden = true
         
+        mapboxView.attributionButton.isHidden = true
+        mapboxView.logoView.isHidden = true
         // Request location access
         if CLLocationManager.authorizationStatus() != .authorizedAlways {
             locationManager.requestAlwaysAuthorization()
