@@ -7,14 +7,16 @@
 //
 
 import UIKit
+import CoreLocation
 import Mapbox
+import MapKit
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var mapboxView: MGLMapView!
     @IBOutlet weak var centerButton: UIButton!
     @IBOutlet weak var goButton: UIButton!
-    @IBOutlet weak var northUp: UIButton!
+    @IBOutlet weak var toggleButton: UIButton!
     
     var locationManager: CLLocationManager!
     var regionRadius: CLLocationDistance = 500
@@ -23,6 +25,9 @@ class ViewController: UIViewController {
     var course: Double = 0.0
     var log = false
     var courseView = false
+    
+    // For simulated reading from DB
+    let fileManager = FileManager.default
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,27 +70,30 @@ class ViewController: UIViewController {
     }
     
     // 'north up' vs course toggle
-    @IBAction func northButtonPressed(_ sender: Any) {
+    @IBAction func toggleButtonPressed(_ sender: Any) {
         courseView ? topMode() : courseMode()
         courseView = !courseView
     }
     
+    
     func courseMode() {
         mapboxView.userTrackingMode = .followWithCourse
-        mapboxView.camera.pitch = 70
-        mapboxView.setZoomLevel(20.0, animated: true)
+        mapboxView.camera.pitch = 60
+        mapboxView.setZoomLevel(17.0, animated: true)
         
     }
     
     func topMode() {
         mapboxView.userTrackingMode = .follow
         mapboxView.camera.pitch = 0
-        mapboxView.setZoomLevel(20.0, animated: true)
+        mapboxView.setZoomLevel(17.0, animated: true)
     }
     
     // Center the map
     func centerMapOnUserLocation() {
-        mapboxView.setCenter(mapboxView.userLocation!.coordinate, zoomLevel: 25.0, animated: true)
+        if let loc = mapboxView.userLocation {
+            mapboxView.setCenter(loc.coordinate, zoomLevel: 15.0, animated: true)
+        }
     }
     
 }
@@ -114,20 +122,7 @@ extension ViewController: CLLocationManagerDelegate {
         //            print("recent")
         //        }
         
-        // Moved to MKMapViewDelegate
-        // Update course when location updates
-        //        if courseView {
-        //            if let loc = locationManager.location {
-        //                // Ignore minor course changes
-        //                if loc.course >= (course + 2.0) || loc.course <= (course - 2.0) {
-        //                    mapView.camera.heading = loc.course
-        //                    course = loc.course
-        //                }
-        //
-        //                print("Course: " + String(round(loc.course)))
-        //                mapView.setCamera(mapView.camera, animated: true)
-        //            }
-        //        }
+        
     }
     
     func logLocation() {
@@ -140,6 +135,32 @@ extension ViewController: CLLocationManagerDelegate {
 
 extension ViewController: MGLMapViewDelegate {
     
+    // Functions for simulating db write
+    func writePolylineToFile(_ data: Data) {
+        let name = "pline.txt"
+        if let dir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = dir.appendingPathComponent(name)
+            do {
+                try data.write(to: fileURL)
+            } catch {
+                print("Error writing file")
+            }
+        }
+        
+    }
+    
+    // Function for simulating db read
+//    func readPolylineFromFile() -> MGLPolyline {
+//        if let dir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+//            let fileURL = dir.appendingPathComponent("pline.txt")
+//
+//            do {
+//                let data = try Data(contentsOf: fileURL)
+//
+//            } catch { print("error creating shape") }
+//        }
+//    }
+    
     func mapView(_ mapView: MGLMapView, didUpdate userLocation: MGLUserLocation?) {
         if log {
             if let loc = locationManager.location {
@@ -150,8 +171,11 @@ extension ViewController: MGLMapViewDelegate {
                 coordinateArray.append((loc.coordinate))
             }
             
+
             let pline = MGLPolyline(coordinates: coordinateArray, count: UInt(coordinateArray.count))
             let encoded = pline.geoJSONData(usingEncoding: String.Encoding.utf8.rawValue)
+            writePolylineToFile(encoded)
+            
             mapboxView.add(pline)
         }
         

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,95 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="mapperTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfB-FU-dWJ">
+                                <rect key="frame" x="0.0" y="574" width="375" height="93"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BN2-p9-7NW">
+                                        <rect key="frame" x="269" y="31" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Go"/>
+                                        <connections>
+                                            <action selector="goButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2tz-Sg-7Ok"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qK-nt-pYX">
+                                        <rect key="frame" x="8" y="31" width="187" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Render from Polyline String"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="93" id="l5h-PW-NEp"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vr9-H0-cEe" customClass="MGLMapView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="546"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEu-tZ-A2G">
+                                        <rect key="frame" x="315" y="486" width="50" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.6618167744843193" blue="0.65655039196501164" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="LhB-Yr-aLe"/>
+                                            <constraint firstAttribute="height" constant="50" id="Unq-6a-jG7"/>
+                                        </constraints>
+                                        <state key="normal" title="Center"/>
+                                        <connections>
+                                            <action selector="centerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gRU-iI-d9M"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSr-mB-TCB">
+                                        <rect key="frame" x="209" y="30" width="156" height="40"/>
+                                        <color key="backgroundColor" red="1" green="0.6618167744843193" blue="0.65655039196501164" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="CoI-FU-Yrx"/>
+                                            <constraint firstAttribute="width" constant="156" id="TF4-Ub-drj"/>
+                                        </constraints>
+                                        <state key="normal" title="Toggle View Type"/>
+                                        <connections>
+                                            <action selector="toggleButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tq6-fh-WVD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="DEu-tZ-A2G" secondAttribute="trailing" constant="10" id="GEY-Hg-lQA"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZSr-mB-TCB" secondAttribute="trailing" constant="10" id="aRV-I3-Ghy"/>
+                                    <constraint firstAttribute="bottom" secondItem="DEu-tZ-A2G" secondAttribute="bottom" constant="10" id="gzK-eM-lFv"/>
+                                    <constraint firstItem="ZSr-mB-TCB" firstAttribute="top" secondItem="vr9-H0-cEe" secondAttribute="top" constant="30" id="svi-Cf-xZs"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleURL__" value="mapbox://styles/mapbox/streets-v10"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="EfB-FU-dWJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LGA-wl-pit"/>
+                            <constraint firstItem="EfB-FU-dWJ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Of0-Oy-sNY"/>
+                            <constraint firstItem="vr9-H0-cEe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WCZ-6n-YQa"/>
+                            <constraint firstItem="vr9-H0-cEe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="eoO-fD-6id"/>
+                            <constraint firstItem="EfB-FU-dWJ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="jtc-ty-SCr"/>
+                            <constraint firstItem="vr9-H0-cEe" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="su5-m1-kO4"/>
+                            <constraint firstItem="EfB-FU-dWJ" firstAttribute="top" secondItem="vr9-H0-cEe" secondAttribute="bottom" constant="8" id="win-vH-Y6v"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="centerButton" destination="DEu-tZ-A2G" id="rNw-Lf-gna"/>
+                        <outlet property="goButton" destination="BN2-p9-7NW" id="Zfg-z7-1SD"/>
+                        <outlet property="mapboxView" destination="vr9-H0-cEe" id="T8I-14-2v1"/>
+                        <outlet property="toggleButton" destination="ZSr-mB-TCB" id="k8M-jP-0z7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
 </document>
