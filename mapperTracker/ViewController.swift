@@ -76,6 +76,10 @@ class ViewController: UIViewController {
         courseView = !courseView
     }
     
+    @IBAction func renderFromPolylineString(_ sender: Any) {
+        locationManager.stopUpdatingLocation()
+        readPolylineFromFile()
+    }
     
     func courseMode() {
         mapboxView.userTrackingMode = .followWithCourse
@@ -137,7 +141,6 @@ extension ViewController: CLLocationManagerDelegate {
     
     func logLocation() {
         locationManager.startUpdatingLocation()
-        mapboxView.camera.pitch = 0
     }
 }
 
@@ -160,16 +163,19 @@ extension ViewController: MGLMapViewDelegate {
     }
     
     // Function for simulating db read
-//    func readPolylineFromFile() -> MGLPolyline {
-//        if let dir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
-//            let fileURL = dir.appendingPathComponent("pline.txt")
-//
-//            do {
-//                let data = try Data(contentsOf: fileURL)
-//
-//            } catch { print("error creating shape") }
-//        }
-//    }
+    func readPolylineFromFile() {
+        if let dir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = dir.appendingPathComponent("pline.txt")
+
+            do {
+                let data = try Data(contentsOf: fileURL)
+                let shapeCollection = try! MGLShape(data: data, encoding: String.Encoding.utf8.rawValue) as! MGLPolylineFeature
+                shapeCollection.title = "recalled"
+                mapboxView.add(shapeCollection)
+                
+            } catch { print("error creating shape") }
+        }
+    }
     
     func mapView(_ mapView: MGLMapView, didUpdate userLocation: MGLUserLocation?) {
         if log {
@@ -193,6 +199,10 @@ extension ViewController: MGLMapViewDelegate {
     }
     
     func mapView(_ mapView: MGLMapView, strokeColorForShapeAnnotation annotation: MGLShape) -> UIColor {
+        if annotation.title == "recalled" {
+            return UIColor.blue
+        }
+
         return UIColor.orange
     }
     
