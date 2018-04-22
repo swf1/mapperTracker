@@ -9,7 +9,6 @@
 import UIKit
 import CoreLocation
 import Mapbox
-import MapKit
 
 class ViewController: UIViewController {
     
@@ -88,10 +87,11 @@ class ViewController: UIViewController {
         mapboxView.setCamera(
             MGLMapCamera(
                 lookingAtCenter: mapboxView.userLocation!.coordinate,
-                fromDistance: 1000,
+                fromDistance: 500,
                 pitch: 70.0,
                 heading: mapboxView.camera.heading),
-            animated: true)
+                animated: true
+            )
     }
     
     func topMode() {
@@ -102,7 +102,8 @@ class ViewController: UIViewController {
                 fromDistance: 1500,
                 pitch: 0.0,
                 heading: mapboxView.camera.heading),
-            animated: true)
+                animated: true
+            )
     }
     
     // Center the map
@@ -182,9 +183,9 @@ extension ViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, didUpdate userLocation: MGLUserLocation?) {
         if log {
             if let loc = locationManager.location {
-                //                print("Lat: " + String(loc.coordinate.latitude))
-                //                print("Lon: " + String(loc.coordinate.longitude))
-                //                print("Speed: " + String(loc.speed))
+                print("Lat: " + String(loc.coordinate.latitude))
+                print("Lon: " + String(loc.coordinate.longitude))
+                print("Speed: " + String(loc.speed))
                 
                 coordinateArray.append((loc.coordinate))
             }
