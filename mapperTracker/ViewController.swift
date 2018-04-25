@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     var course: Double = 0.0
     var log = false
     var courseView = false
-    
+    var firstLast: [CLLocationCoordinate2D]?  // for start and end coordinate. should be added to activity object
     // For simulated reading from DB
     let fileManager = FileManager.default
     
@@ -113,6 +113,19 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    // For annotations at start and end
+    func annotationsAt(coordinates: [CLLocationCoordinate2D]) {
+        var annotations = [MGLPointAnnotation]()
+        for c in coordinates {
+            let p = MGLPointAnnotation()
+            p.coordinate = c
+            annotations.append(p)
+        }
+        
+        mapboxView.addAnnotations(annotations)
+    }
+    
 }
 
 // MARK: CLLocationManagerDelegate
@@ -147,7 +160,7 @@ extension ViewController: CLLocationManagerDelegate {
     }
 }
 
-// MARK: MKMapViewDeleage
+// MARK: MGLMapViewDeleage
 
 extension ViewController: MGLMapViewDelegate {
     
@@ -167,13 +180,19 @@ extension ViewController: MGLMapViewDelegate {
     
     // Function for simulating db read
     func readPolylineFromFile() {
+
         if let dir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
             let fileURL = dir.appendingPathComponent("pline.txt")
 
             do {
                 let data = try Data(contentsOf: fileURL)
                 let shapeCollection = try! MGLShape(data: data, encoding: String.Encoding.utf8.rawValue) as! MGLPolylineFeature
-                shapeCollection.title = "recalled"
+                
+                 //Add  annotation at start and end
+                if let fl = firstLast {
+                    annotationsAt(coordinates: fl)
+                }
+                
                 mapboxView.add(shapeCollection)
                 
             } catch { print("error creating shape") }
@@ -190,7 +209,7 @@ extension ViewController: MGLMapViewDelegate {
                 coordinateArray.append((loc.coordinate))
             }
             
-
+            firstLast = [coordinateArray[0], coordinateArray[coordinateArray.count - 1]]
             let pline = MGLPolyline(coordinates: coordinateArray, count: UInt(coordinateArray.count))
             let encoded = pline.geoJSONData(usingEncoding: String.Encoding.utf8.rawValue)
             writePolylineToFile(encoded)
@@ -199,6 +218,24 @@ extension ViewController: MGLMapViewDelegate {
         }
         
         // Course smoothing not necessary with mapbox
+    }
+    
+    func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
+        guard annotation is MGLPointAnnotation else {
+            return nil
+        }
+        
+        let reuseIdentifier = "\(annotation.coordinate.longitude)"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+        // If there’s no reusable annotation view available, initialize a new one.
+        if annotationView == nil {
+            annotationView = MGLAnnotationView(reuseIdentifier: reuseIdentifier)
+            annotationView!.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+            
+            annotationView?.backgroundColor = UIColor.red
+        }
+        
+        return annotationView
     }
     
     func mapView(_ mapView: MGLMapView, strokeColorForShapeAnnotation annotation: MGLShape) -> UIColor {

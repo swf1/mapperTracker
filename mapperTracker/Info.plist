@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Shows your location on the map and helps improve OpenStreetMap.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Shows your location on the map and helps improve OpenStreetMap.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -24,6 +20,18 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoiamhvZiIsImEiOiIwOGMxNzAwZjE4OWQzOTJkZTg4MDFmNzgxMWNhYTdiNCJ9.2rgfIewvhUnoK6DfhyJ2gg</string>
+	<key>MGLMapboxMetricsEnabledSettingShownInApp</key>
+	<string>YES</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Shows your location on the map and helps improve OpenStreetMap.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Shows your location on the map and helps improve OpenStreetMap.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -45,9 +53,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>MGLMapboxAccessToken</key>
-	<string>pk.eyJ1IjoiamhvZiIsImEiOiIwOGMxNzAwZjE4OWQzOTJkZTg4MDFmNzgxMWNhYTdiNCJ9.2rgfIewvhUnoK6DfhyJ2gg</string>
-	<key>MGLMapboxMetricsEnabledSettingShownInApp</key>
-	<string>YES</string>
 </dict>
 </plist>

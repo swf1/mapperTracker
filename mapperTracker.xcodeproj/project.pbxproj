@@ -8,14 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		106041D223A332B143B72FCF /* Pods_mapperTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FF3FF4AC058A4E217A047F /* Pods_mapperTracker.framework */; };
+		31979E8F208D3A710060915A /* RunTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31979E8E208D3A710060915A /* RunTimer.swift */; };
 		31D1D04B208BB76700E10EC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D1D04A208BB76700E10EC2 /* AppDelegate.swift */; };
 		31D1D04D208BB76700E10EC2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D1D04C208BB76700E10EC2 /* ViewController.swift */; };
 		31D1D050208BB76700E10EC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31D1D04E208BB76700E10EC2 /* Main.storyboard */; };
 		31D1D052208BB76800E10EC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31D1D051208BB76800E10EC2 /* Assets.xcassets */; };
 		31D1D055208BB76800E10EC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31D1D053208BB76800E10EC2 /* LaunchScreen.storyboard */; };
+		31D1D05D208D13F500E10EC2 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D1D05C208D13F500E10EC2 /* Activity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		31979E8E208D3A710060915A /* RunTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunTimer.swift; sourceTree = "<group>"; };
 		31D1D047208BB76700E10EC2 /* mapperTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mapperTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31D1D04A208BB76700E10EC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31D1D04C208BB76700E10EC2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -23,6 +26,7 @@
 		31D1D051208BB76800E10EC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		31D1D054208BB76800E10EC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		31D1D056208BB76800E10EC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31D1D05C208D13F500E10EC2 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		5A3F37BA38DBEBEB877F9CE5 /* Pods-mapperTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapperTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-mapperTracker/Pods-mapperTracker.release.xcconfig"; sourceTree = "<group>"; };
 		C2FF3FF4AC058A4E217A047F /* Pods_mapperTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mapperTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE99DB2DD8D25ECADD8BF9EB /* Pods-mapperTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapperTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mapperTracker/Pods-mapperTracker.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,6 +75,8 @@
 			children = (
 				31D1D04A208BB76700E10EC2 /* AppDelegate.swift */,
 				31D1D04C208BB76700E10EC2 /* ViewController.swift */,
+				31D1D05C208D13F500E10EC2 /* Activity.swift */,
+				31979E8E208D3A710060915A /* RunTimer.swift */,
 				31D1D04E208BB76700E10EC2 /* Main.storyboard */,
 				31D1D051208BB76800E10EC2 /* Assets.xcassets */,
 				31D1D053208BB76800E10EC2 /* LaunchScreen.storyboard */,
@@ -123,6 +129,11 @@
 				TargetAttributes = {
 					31D1D046208BB76700E10EC2 = {
 						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -218,8 +229,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31D1D05D208D13F500E10EC2 /* Activity.swift in Sources */,
 				31D1D04D208BB76700E10EC2 /* ViewController.swift in Sources */,
 				31D1D04B208BB76700E10EC2 /* AppDelegate.swift in Sources */,
+				31979E8F208D3A710060915A /* RunTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,7 +380,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XU5AWAYW87;
 				INFOPLIST_FILE = mapperTracker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = JHM.mapperTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -383,7 +399,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XU5AWAYW87;
 				INFOPLIST_FILE = mapperTracker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = JHM.mapperTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
