@@ -43,7 +43,7 @@
                                     <constraint firstAttribute="height" constant="93" id="l5h-PW-NEp"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vr9-H0-cEe" customClass="MGLMapView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vr9-H0-cEe">
                                 <rect key="frame" x="0.0" y="20" width="375" height="546"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEu-tZ-A2G">
@@ -82,13 +82,45 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleURL__" value="mapbox://styles/mapbox/streets-v10"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kL-me-BSw">
+                                <rect key="frame" x="0.0" y="525" width="285" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="AW5-ye-CcC">
+                                        <rect key="frame" x="10" y="15" width="265" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XhU-NY-6lD">
+                                                <rect key="frame" x="0.0" y="0.0" width="112.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdp-Gk-HKO">
+                                                <rect key="frame" x="152.5" y="0.0" width="112.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.87428616751269039" green="0.87428616751269039" blue="0.87428616751269039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4E0-3f-UPf"/>
+                                    <constraint firstAttribute="trailing" secondItem="AW5-ye-CcC" secondAttribute="trailing" constant="10" id="GNk-oC-YRu"/>
+                                    <constraint firstItem="AW5-ye-CcC" firstAttribute="centerY" secondItem="8kL-me-BSw" secondAttribute="centerY" id="lm9-eT-1OB"/>
+                                    <constraint firstItem="AW5-ye-CcC" firstAttribute="leading" secondItem="8kL-me-BSw" secondAttribute="leading" constant="10" id="qH2-sS-YMh"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8kL-me-BSw" secondAttribute="bottom" constant="92" id="4vU-9U-V4d"/>
                             <constraint firstItem="EfB-FU-dWJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LGA-wl-pit"/>
                             <constraint firstItem="EfB-FU-dWJ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Of0-Oy-sNY"/>
                             <constraint firstItem="vr9-H0-cEe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WCZ-6n-YQa"/>
+                            <constraint firstItem="8kL-me-BSw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="akP-qZ-joq"/>
                             <constraint firstItem="vr9-H0-cEe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="eoO-fD-6id"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8kL-me-BSw" secondAttribute="trailing" constant="90" id="ixh-KN-n9w"/>
                             <constraint firstItem="EfB-FU-dWJ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="jtc-ty-SCr"/>
                             <constraint firstItem="vr9-H0-cEe" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="su5-m1-kO4"/>
                             <constraint firstItem="EfB-FU-dWJ" firstAttribute="top" secondItem="vr9-H0-cEe" secondAttribute="bottom" constant="8" id="win-vH-Y6v"/>
@@ -97,8 +129,10 @@
                     </view>
                     <connections>
                         <outlet property="centerButton" destination="DEu-tZ-A2G" id="rNw-Lf-gna"/>
+                        <outlet property="distanceLabel" destination="kdp-Gk-HKO" id="6TX-7J-07j"/>
                         <outlet property="goButton" destination="BN2-p9-7NW" id="Zfg-z7-1SD"/>
                         <outlet property="mapboxView" destination="vr9-H0-cEe" id="T8I-14-2v1"/>
+                        <outlet property="paceLabel" destination="XhU-NY-6lD" id="rnM-KI-vW3"/>
                         <outlet property="toggleButton" destination="ZSr-mB-TCB" id="k8M-jP-0z7"/>
                     </connections>
                 </viewController>

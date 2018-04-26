@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var centerButton: UIButton!
     @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var toggleButton: UIButton!
+    @IBOutlet weak var paceLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     var locationManager: CLLocationManager!
     var regionRadius: CLLocationDistance = 500
@@ -220,6 +222,15 @@ extension ViewController: MGLMapViewDelegate {
         // Course smoothing not necessary with mapbox
     }
     
+    
+    func mapView(_ mapView: MGLMapView, imageFor annotation: MGLAnnotation) -> MGLAnnotationImage? {
+        let start = UIImage(named: "play-circle")
+        var annotationImage = MGLAnnotationImage(image: start!, reuseIdentifier: "start")
+        
+        return annotationImage
+    }
+    
+    
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
         guard annotation is MGLPointAnnotation else {
             return nil
@@ -227,11 +238,13 @@ extension ViewController: MGLMapViewDelegate {
         
         let reuseIdentifier = "\(annotation.coordinate.longitude)"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+        
+
         // If there’s no reusable annotation view available, initialize a new one.
         if annotationView == nil {
             annotationView = MGLAnnotationView(reuseIdentifier: reuseIdentifier)
             annotationView!.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-            
+
             annotationView?.backgroundColor = UIColor.red
         }
         
