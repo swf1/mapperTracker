@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var toggleButton: UIButton!
     @IBOutlet weak var paceLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var avgPaceLabel: UILabel!
     
     var locationManager: CLLocationManager!
     var regionRadius: CLLocationDistance = 500
@@ -29,6 +29,8 @@ class ViewController: UIViewController {
     var firstLast: [CLLocationCoordinate2D]?  // for start and end coordinate. should be added to activity object
     // For simulated reading from DB
     let fileManager = FileManager.default
+    var paceArray = [Double]() // To calc average pace
+    var df = DateComponentsFormatter()  // For time display
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +47,10 @@ class ViewController: UIViewController {
         
         mapboxView.attributionButton.isHidden = true
         mapboxView.logoView.isHidden = true
+        
+        df.allowedUnits = [.minute, .second]
+        df.zeroFormattingBehavior = .pad
+        
         // Request location access
         if CLLocationManager.authorizationStatus() != .authorizedAlways {
             locationManager.requestAlwaysAuthorization()
@@ -128,17 +134,27 @@ class ViewController: UIViewController {
         
         mapboxView.addAnnotations(annotations)
     }
-
+    
+    // Pace and average pace can be smoothed by checking for accuracy
+    // of GPS coordinates:
+    //  - no cell towers, no points older than previous, unrealistic acceleration or horiz accuracy low
+    
+    
     // Rough pace based off speed
     func pace() -> String {
         let mps = Measurement(value: locationManager.location!.speed, unit: UnitSpeed.metersPerSecond)
         let mph = mps.converted(to: .milesPerHour)
         let paceInSeconds = 3600.0 / mph.value
-        let df = DateComponentsFormatter()
-        df.allowedUnits = [.minute, .second]
-        df.zeroFormattingBehavior = .pad
+        paceArray.append(paceInSeconds)
         guard let formattedPace = df.string(from: paceInSeconds) else { return "Err" }
         return formattedPace
+    }
+    
+    func avgPace() -> String {
+        let s = paceArray.reduce(0.0, +)
+        let avg = s / Double(paceArray.count)
+        guard let avgPace = df.string(from: avg) else { return "Err" }
+        return avgPace
     }
 }
 
@@ -220,6 +236,7 @@ extension ViewController: MGLMapViewDelegate {
 //                print("Lon: " + String(loc.coordinate.longitude))
 //                print("Speed: " + String(loc.speed))
                 paceLabel.text = pace()
+                avgPaceLabel.text = avgPace()
                 coordinateArray.append((loc.coordinate))
             }
             

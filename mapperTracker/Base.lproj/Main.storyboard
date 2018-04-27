@@ -128,8 +128,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="avgPaceLabel" destination="kdp-Gk-HKO" id="ucB-ga-dNh"/>
                         <outlet property="centerButton" destination="DEu-tZ-A2G" id="rNw-Lf-gna"/>
-                        <outlet property="distanceLabel" destination="kdp-Gk-HKO" id="6TX-7J-07j"/>
                         <outlet property="goButton" destination="BN2-p9-7NW" id="Zfg-z7-1SD"/>
                         <outlet property="mapboxView" destination="vr9-H0-cEe" id="T8I-14-2v1"/>
                         <outlet property="paceLabel" destination="XhU-NY-6lD" id="rnM-KI-vW3"/>
