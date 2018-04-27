@@ -35,6 +35,7 @@ class ViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest // energy expensive
+        locationManager.activityType = .fitness
         locationManager.startUpdatingLocation()
         
         mapboxView.delegate = self
@@ -127,7 +128,18 @@ class ViewController: UIViewController {
         
         mapboxView.addAnnotations(annotations)
     }
-    
+
+    // Rough pace based off speed
+    func pace() -> String {
+        let mps = Measurement(value: locationManager.location!.speed, unit: UnitSpeed.metersPerSecond)
+        let mph = mps.converted(to: .milesPerHour)
+        let paceInSeconds = 3600.0 / mph.value
+        let df = DateComponentsFormatter()
+        df.allowedUnits = [.minute, .second]
+        df.zeroFormattingBehavior = .pad
+        guard let formattedPace = df.string(from: paceInSeconds) else { return "Err" }
+        return formattedPace
+    }
 }
 
 // MARK: CLLocationManagerDelegate
@@ -204,10 +216,10 @@ extension ViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, didUpdate userLocation: MGLUserLocation?) {
         if log {
             if let loc = locationManager.location {
-                print("Lat: " + String(loc.coordinate.latitude))
-                print("Lon: " + String(loc.coordinate.longitude))
-                print("Speed: " + String(loc.speed))
-                
+//                print("Lat: " + String(loc.coordinate.latitude))
+//                print("Lon: " + String(loc.coordinate.longitude))
+//                print("Speed: " + String(loc.speed))
+                paceLabel.text = pace()
                 coordinateArray.append((loc.coordinate))
             }
             

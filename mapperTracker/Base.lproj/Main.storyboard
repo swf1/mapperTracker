@@ -43,7 +43,7 @@
                                     <constraint firstAttribute="height" constant="93" id="l5h-PW-NEp"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vr9-H0-cEe">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vr9-H0-cEe" customClass="MGLMapView">
                                 <rect key="frame" x="0.0" y="20" width="375" height="546"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEu-tZ-A2G">

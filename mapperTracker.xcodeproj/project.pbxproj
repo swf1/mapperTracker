@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		106041D223A332B143B72FCF /* Pods_mapperTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FF3FF4AC058A4E217A047F /* Pods_mapperTracker.framework */; };
-		31979E8F208D3A710060915A /* RunTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31979E8E208D3A710060915A /* RunTimer.swift */; };
+		31979E8F208D3A710060915A /* ActivityTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31979E8E208D3A710060915A /* ActivityTimer.swift */; };
 		31D1D04B208BB76700E10EC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D1D04A208BB76700E10EC2 /* AppDelegate.swift */; };
 		31D1D04D208BB76700E10EC2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D1D04C208BB76700E10EC2 /* ViewController.swift */; };
 		31D1D050208BB76700E10EC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31D1D04E208BB76700E10EC2 /* Main.storyboard */; };
@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		31979E8E208D3A710060915A /* RunTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunTimer.swift; sourceTree = "<group>"; };
+		31979E8E208D3A710060915A /* ActivityTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTimer.swift; sourceTree = "<group>"; };
 		31D1D047208BB76700E10EC2 /* mapperTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mapperTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31D1D04A208BB76700E10EC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31D1D04C208BB76700E10EC2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 				31D1D04A208BB76700E10EC2 /* AppDelegate.swift */,
 				31D1D04C208BB76700E10EC2 /* ViewController.swift */,
 				31D1D05C208D13F500E10EC2 /* Activity.swift */,
-				31979E8E208D3A710060915A /* RunTimer.swift */,
+				31979E8E208D3A710060915A /* ActivityTimer.swift */,
 				31D1D04E208BB76700E10EC2 /* Main.storyboard */,
 				31D1D051208BB76800E10EC2 /* Assets.xcassets */,
 				31D1D053208BB76800E10EC2 /* LaunchScreen.storyboard */,
@@ -232,7 +232,7 @@
 				31D1D05D208D13F500E10EC2 /* Activity.swift in Sources */,
 				31D1D04D208BB76700E10EC2 /* ViewController.swift in Sources */,
 				31D1D04B208BB76700E10EC2 /* AppDelegate.swift in Sources */,
-				31979E8F208D3A710060915A /* RunTimer.swift in Sources */,
+				31979E8F208D3A710060915A /* ActivityTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
