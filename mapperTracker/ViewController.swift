@@ -18,12 +18,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var toggleButton: UIButton!
     @IBOutlet weak var paceLabel: UILabel!
     @IBOutlet weak var avgPaceLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     var locationManager: CLLocationManager!
     var regionRadius: CLLocationDistance = 500
     var coordinateArray = [CLLocationCoordinate2D]()
     var cam = MGLMapCamera()
     var course: Double = 0.0
+    var totalDistance = 0.0
     var log = false
     var courseView = false
     var firstLast: [CLLocationCoordinate2D]?  // for start and end coordinate. should be added to activity object
@@ -50,6 +52,10 @@ class ViewController: UIViewController {
         
         df.allowedUnits = [.minute, .second]
         df.zeroFormattingBehavior = .pad
+        
+        paceLabel.text = ""
+        distanceLabel.text = ""
+        avgPaceLabel.text = ""
         
         // Request location access
         if CLLocationManager.authorizationStatus() != .authorizedAlways {
@@ -156,6 +162,15 @@ class ViewController: UIViewController {
         guard let avgPace = df.string(from: avg) else { return "Err" }
         return avgPace
     }
+    
+    func totalDistance(newLocation: CLLocation) {
+        if let last = coordinateArray.last {
+            let loc = CLLocation(latitude: last.latitude, longitude: last.longitude)
+            var dist = Measurement(value: newLocation.distance(from: loc), unit: UnitLength.meters)
+            dist = dist.converted(to: .miles)
+            totalDistance += dist.value
+        }
+    }
 }
 
 // MARK: CLLocationManagerDelegate
@@ -237,6 +252,8 @@ extension ViewController: MGLMapViewDelegate {
 //                print("Speed: " + String(loc.speed))
                 paceLabel.text = pace()
                 avgPaceLabel.text = avgPace()
+                totalDistance(newLocation: loc)
+                distanceLabel.text = String(format: "%.2f", totalDistance)
                 coordinateArray.append((loc.coordinate))
             }
             

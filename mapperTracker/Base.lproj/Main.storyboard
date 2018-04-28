@@ -88,14 +88,20 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="AW5-ye-CcC">
                                         <rect key="frame" x="10" y="15" width="265" height="20.5"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nlh-uI-nSv">
+                                                <rect key="frame" x="0.0" y="0.0" width="61.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XhU-NY-6lD">
-                                                <rect key="frame" x="0.0" y="0.0" width="112.5" height="20.5"/>
+                                                <rect key="frame" x="101.5" y="0.0" width="62" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdp-Gk-HKO">
-                                                <rect key="frame" x="152.5" y="0.0" width="112.5" height="20.5"/>
+                                                <rect key="frame" x="203.5" y="0.0" width="61.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -130,6 +136,7 @@
                     <connections>
                         <outlet property="avgPaceLabel" destination="kdp-Gk-HKO" id="ucB-ga-dNh"/>
                         <outlet property="centerButton" destination="DEu-tZ-A2G" id="rNw-Lf-gna"/>
+                        <outlet property="distanceLabel" destination="Nlh-uI-nSv" id="adV-8q-hgr"/>
                         <outlet property="goButton" destination="BN2-p9-7NW" id="Zfg-z7-1SD"/>
                         <outlet property="mapboxView" destination="vr9-H0-cEe" id="T8I-14-2v1"/>
                         <outlet property="paceLabel" destination="XhU-NY-6lD" id="rnM-KI-vW3"/>
